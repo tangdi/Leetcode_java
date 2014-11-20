@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class WordLadderII {
@@ -13,6 +15,114 @@ public class WordLadderII {
 	
 	
 	public List<List<String>> findLadders(String start, String end,
+			Set<String> dict) {
+		
+		
+		result = new ArrayList<List<String>>();
+		
+		if(start.equals(end)){
+			List<String> quickResult = new ArrayList<String>();
+			quickResult.add(start);
+			quickResult.add(end);
+			result.add(quickResult);
+			return result;
+		}
+		
+		HashSet<String> unvisitedSet = new HashSet<String>();
+		unvisitedSet.addAll(dict);
+		unvisitedSet.add(start);
+		unvisitedSet.remove(end);
+		
+		LinkedList<String> wordQueue = new LinkedList<String>();
+		LinkedList<Integer> distanceQueue = new LinkedList<Integer>();
+		Map<String, List<String>> nextMap = new HashMap<String, List<String>>();
+		for (String e : unvisitedSet) {
+		      nextMap.put(e, new ArrayList<String>());
+		}
+		
+		
+		Set<String> current_layer = new HashSet<String>();
+		Set<String> next_layer = new HashSet<String>();
+		Integer layer_num = Integer.MAX_VALUE;
+		boolean exist = false;
+		wordQueue.add(start);
+		
+		distanceQueue.add(1);
+		current_layer.add(start);
+		//as delimiter
+		wordQueue.add(null);
+		
+		
+		outer: while(!wordQueue.isEmpty()){
+			String word = wordQueue.pop();
+			if(word == null){
+				if (!wordQueue.isEmpty()){
+					wordQueue.add(null);
+					for(String str: current_layer){
+						unvisitedSet.remove(str);
+					}
+					System.out.println("current is "+current_layer);
+					System.out.println("next is "+next_layer);
+					current_layer = next_layer;
+					next_layer = new HashSet<String>() ;
+				}
+				continue;
+			}
+			Integer distance = distanceQueue.pop();
+			if(distance>layer_num){
+				break;
+			}
+			//current_layer.add(word);
+			List<String> subtree = nextMap.get(word);
+			
+			for(int i=0; i<word.length();i++){
+				char[] charArray = word.toCharArray();
+				for(char c='a'; c<'z'; c++){
+					charArray[i] = c;
+					String newString = new String(charArray);
+				
+					if(newString.equals(end)){
+						exist = true;
+						layer_num=Math.min(layer_num, distance);
+						subtree.clear();
+						subtree.add(end);
+						nextMap.put(word, subtree);
+						continue outer;
+						}
+						
+					
+					if(unvisitedSet.contains(newString) && !current_layer.contains(newString)){
+						subtree.add(newString);
+						wordQueue.add(newString);
+						distanceQueue.add(distance+1);
+						next_layer.add(newString);
+					}
+					nextMap.put(word, subtree);
+				}	
+			}
+		}
+		System.out.println(nextMap);
+		if(!exist) return result;
+		List<String> path = new ArrayList<String>();
+		path.add(start);
+		buildTree(start, end, nextMap,path);
+		return result;
+	}
+	
+	public void buildTree(String start, String end, Map<String, List<String>> map, List<String> path){
+		if(start.equals(end)){
+			result.add(new ArrayList<String>(path));
+			return;
+		}
+		
+		for(String str: map.get(start)){
+			path.add(str);
+			buildTree(str, end, map, path);
+			path.remove(path.size()-1);
+		}
+	}
+	
+	public List<List<String>> findLaddersDFSs(String start, String end,
 			Set<String> dict) {
 		result = new ArrayList<List<String>>();
 		dict.add(end);
@@ -220,9 +330,9 @@ public class WordLadderII {
 
 	public static void main(String[] args) {
 		WordLadderII s1 = new WordLadderII();
-		String start = "hit";
-		String end = "cog";
-		String[] words = { "hot", "dot", "dog", "lot", "log" };
+		String start = "red";
+		String end = "tax";
+		String[] words = { "ted","tex","red","tax","tad","den","rex","pee" };
 		HashSet<String> dict = new HashSet<String>(Arrays.asList(words));
 		System.out.println(s1.findLadders(start, end, dict));
 	}
