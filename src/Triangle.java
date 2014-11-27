@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 public class Triangle {
    
    
@@ -11,7 +12,7 @@ public class Triangle {
       
         
         for (int i=1; i<listSize; i++){
-            List<Integer> temp = new ArrayList<>();
+            List<Integer> temp = new ArrayList<Integer>();
             int previous_head = matrix[0];
             int previous_tail =  matrix[triangle.get(i).size()-2];
             

@@ -51,19 +51,7 @@ public class ScrambleString {
 
 	    }
 	  
-	  public static boolean isScrambleDP(String s1, String s2){
-		  if(s1.length() != s2.length()){
-			  return false;
-		  }
-		  if(s1.equals(s2)){
-			  return true;
-		  }
-		  
-		  s1.
-		  
-		  
-	  }
-	  
+
 	  public static void main(String[] args){
 		  
 		  String s1 = new String("great");
