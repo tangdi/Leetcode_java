@@ -66,7 +66,7 @@ public class SubstringwithConcatenationofAllWords {
     			records.put(s, records.containsKey(s)? records.get(s)+1:1);	
     		}
     		
-    		if(count == L.length){
+    		if(count == L.length){//
     			result.add(i);
     		}
     	}
