@@ -77,6 +77,5 @@ public class SubstringwithConcatenationofAllWords {
     	SubstringwithConcatenationofAllWords s1 = new SubstringwithConcatenationofAllWords();
     	String S = "lingmindraboofooowingdingbarrwingmonkeypoundcake";
     	String[] L = {"fooo","barr","wing","ding","wing"};
-    	System.out.println(s1.findSubstring(S, L));
     }
 }
