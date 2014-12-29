@@ -17,7 +17,7 @@ public class WildMatch {
 			}
 			
 			for(int i = p_start; i< p.length(); i++){
-				if (p.charAt(i) != '*'){
+				if (p.charAt(i) != '*' && p.charAt(i+1) != '*'){
 					return false;
 				}
 			}
