@@ -25,7 +25,7 @@ public class GenerateParentheses {
         }
 		
 		if(right<left){
-			helper(n, deep +1, result, s +")", left, right + 1);
+			helper(n, deep +1, result, s + ")", left, right + 1);
 		}
 	}
 		
