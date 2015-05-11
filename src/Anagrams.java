@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -45,6 +46,8 @@ public class Anagrams {
 		Anagrams s1 = new Anagrams();
 		String[] strs = {"tea","and","ate","eat","dan"};
 		System.out.println(s1.anagrams(strs));
+		Comparator s1 = new Comparator<String>() {
+		};
 	}
 
 }
