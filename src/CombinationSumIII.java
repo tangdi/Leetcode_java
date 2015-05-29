@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,14 +13,14 @@ public class CombinationSumIII {
 	    private void helper(int start, int sum, int length, List<Integer>list, int target){
 	        if(list.size() == length ){
 	            if(sum == target){
-	                result.add(new ArrayList(list));
+	                result.add(new ArrayList<Integer>(list));
 	            }
 	            return;
 	        }
 	        for(int i =start; i<=9 ;i++){
 	            list.add(i);
 	            sum += i;
-	            helper(i+1, sum, list, target);
+	            helper(i+1, sum, length, list, target);
 	            sum -= i;
 	            list.remove(list.size()-1);
 	        }
