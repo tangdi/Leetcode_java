@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 
-public class Trie {
+public class TrieEx {
 	public static class TrieNode {
 	    // Initialize your data structure here.
 	    public List<TrieNode> children;
@@ -90,8 +92,8 @@ public class Trie {
 	    }
 	}
 
-	// Your Trie object will be instantiated and called as such:
-	// Trie trie = new Trie();
+	// Your TrieEx object will be instantiated and called as such:
+	// TrieEx trie = new TrieEx();
 	// trie.insert("somestring");
 	// trie.search("key");
 }

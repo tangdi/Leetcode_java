@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class LongestSubstringWithoutRepeatingCharacters {
@@ -32,8 +29,27 @@ public class LongestSubstringWithoutRepeatingCharacters {
 		 }
 		 return longest;
 	    }
+
+	// 2016/07/26
+	public int lengthOfLongestSubstringNew(String s) {
+		if(s == null) return 0;
+		int max = 0;
+		Queue<String> queue = new LinkedList<>();
+		for(int j=0; j<s.length(); j++){
+
+			String toBeAdded = s.substring(j, j+1);
+			while(queue.contains(toBeAdded)){
+				queue.poll();
+			}
+			queue.add(toBeAdded);
+			max = Math.max(max, queue.size());
+
+		}
+		return max;
+	}
 	 
 	 public static void main(String[] args){
+
 		 LongestSubstringWithoutRepeatingCharacters s1 = new LongestSubstringWithoutRepeatingCharacters();
 		 String s = "wlrbbmqbhcdarzowkkyhiddqscdxrjmowfrxsjybldbefsarcbynecdyggxxpklorellnmpapqfwkhopkmco";
 		 System.out.println(s1.lengthOfLongestSubstring(s));

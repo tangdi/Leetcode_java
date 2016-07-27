@@ -23,7 +23,6 @@ public class ExcelSheetColumnTitle {
 	 public static void main(String[] args) {
 		ExcelSheetColumnTitle s1 = new ExcelSheetColumnTitle();
 		String s = s1.convertToTitle(27*26);
-		s.to
 		System.out.println(s);
 	 }
 }

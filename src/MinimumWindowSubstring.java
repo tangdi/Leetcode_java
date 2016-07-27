@@ -50,8 +50,8 @@ public class MinimumWindowSubstring {
 		return "";
 	}
 
-	public String minWindow(String S, String T) {
-		char[] chars = T.toCharArray();
+	public String minWindow(String s, String t) {
+		char[] chars = t.toCharArray();
 		HashMap<Character, Integer> chars_count = new HashMap<Character, Integer>();
 		for (char c : chars) {
 			if (chars_count.containsKey(c)) {
@@ -68,8 +68,8 @@ public class MinimumWindowSubstring {
 		int count = 0;
 
 
-		for (int end = 0; end < S.length(); end++) {
-			char c = S.charAt(end);
+		for (int end = 0; end < s.length(); end++) {
+			char c = s.charAt(end);
 
 			if (!chars_count.containsKey(c)) {
 				continue;
@@ -88,9 +88,9 @@ public class MinimumWindowSubstring {
 			count ++;
 			
 			if(count == chars.length){
-				while(!chars_count.containsKey(S.charAt(start)) || chars_count.get(S.charAt(start)) < record.get(S.charAt(start))){
-					if(chars_count.containsKey(S.charAt(start))){
-						record.put(S.charAt(start), record.get(S.charAt(start)) -1);
+				while(!chars_count.containsKey(s.charAt(start)) || chars_count.get(s.charAt(start)) < record.get(s.charAt(start))){
+					if(chars_count.containsKey(s.charAt(start))){
+						record.put(s.charAt(start), record.get(s.charAt(start)) -1);
 					}
 					start ++;
 				}
@@ -101,19 +101,19 @@ public class MinimumWindowSubstring {
 				}
 				count --;
 				
-				if(chars_count.containsKey(S.charAt(start))){
-					record.put(S.charAt(start), record.get(S.charAt(start)) -1);
+				if(chars_count.containsKey(s.charAt(start))){
+					record.put(s.charAt(start), record.get(s.charAt(start)) -1);
 				}
 				start ++;
 				
 			}
 		}
 
-		if(min_len>S.length()){
+		if(min_len>s.length()){
 			return "";
 		}
 		
-		return S.substring(min_start, min_end + 1);
+		return s.substring(min_start, min_end + 1);
 	}
 
 	public static void main(String[] args) {

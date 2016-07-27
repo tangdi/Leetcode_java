@@ -72,7 +72,38 @@ public class SubstringwithConcatenationofAllWords {
     	}
     	return result;
     }
-    
+
+	public List<Integer> findSubstring_2016_07(String s, String[] words) {
+		List<Integer> result  = new ArrayList<>();
+		int totalLength = words.length * words[0].length();
+		for(int i = 0,j=totalLength-1; i<=j && j < s.length();){
+			if(exactContern(s.substring(i, j+1), words)){
+				result.add(i);
+			}
+			i ++;
+			j ++;
+		}
+		return result;
+	}
+	private boolean exactContern(String s, String[] words){
+		StringBuilder sb = new StringBuilder().append(s);
+		for(String target: words){
+			int index = -1;
+			String existing = sb.toString();
+			for(int i=0; i<=existing.length()-target.length(); i += target.length()){
+				if(existing.substring(i, i+target.length()).equals(target)){
+					index = i;
+					break;
+				}
+			}
+			if(index == -1) return false;
+
+			sb.setLength(0);
+			sb.append(existing.substring(0, index)).append(existing.substring(index+target.length()));
+		}
+		return sb.toString().length() == 0;
+
+	}
     public static void main(String[] args){
     	SubstringwithConcatenationofAllWords s1 = new SubstringwithConcatenationofAllWords();
     	String S = "lingmindraboofooowingdingbarrwingmonkeypoundcake";
