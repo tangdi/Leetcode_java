@@ -52,6 +52,26 @@ public class Pow {
 		Pow s1 = new Pow();
 		double x = 8.88023;
 		int n = 3;
-		System.out.println(s1.pow(x, n));
+		System.out.println(s1.pow2(x, n));
+	}
+
+	public double pow2(double x, int n){
+		if(x ==0) return 0;
+		boolean negative = n <0;
+
+		double result = 1;
+		n = Math.abs(n);
+
+		while(n>0){
+			double temp = x;
+			int times = 1;
+			while(times <= n/2){
+				times *= 2;
+				temp *= temp;
+			}
+			n -= times;
+			result *= temp;
+		}
+		return negative? 1/result: result;
 	}
 }
