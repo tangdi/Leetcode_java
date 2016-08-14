@@ -7,6 +7,60 @@ import java.util.Set;
 import java.util.Stack;
 
 public class SurroundedRegion {
+	public void solveWithDisjointSet(char[][] board) {
+		int rows = board.length;
+		if(rows ==0) return;
+		int cols = board[0].length;
+		if(cols ==0) return;
+		int[] roots = new int[rows * cols];
+		boolean[] surroundedMap = new boolean[rows*cols];
+		int[] colDelta = {-1, 0, 1, 0};
+		int[] rowDelta = {0, -1, 0, 1};
+		for(int row =0; row<rows; row++){
+			for(int col = 0; col< cols; col++){
+				if(board[row][col] == 'O'){
+					int index = row*cols + col;
+					roots[index] = index;
+					boolean surrounded = true;
+					for( int i=0; i<colDelta.length; i++){
+						int neigCol = col + colDelta[i];
+						int neigRow = row + rowDelta[i];
+
+						if(neigCol< cols && neigCol >=0 && neigRow <rows && neigRow >=0){
+							int neigIndex = neigRow * cols + neigCol;
+							if(board[neigRow][neigCol] == 'O' && roots[neigIndex] > 0){
+								int neigRoot = findRoot(roots, neigIndex);
+								roots[neigRoot] = index;
+								if(neigRoot != index) surrounded = surrounded && surroundedMap[neigRoot];
+							}
+						}else{
+							surrounded = false;
+						}
+					}
+					surroundedMap[index] = surrounded;
+				}
+			}
+		}
+
+		for(int row =0; row<rows; row++){
+			for(int col = 0; col< cols; col++){
+				if(board[row][col] == 'O'){
+					if(surroundedMap[findRoot(roots, row * cols + col)]){
+						board[row][col] = 'X';
+					}
+				}
+			}
+		}
+	}
+
+	private int findRoot(int[] roots, int index){
+		while(roots[index] != index){
+			int temp = roots[index];
+			roots[index] = roots[temp];
+			index = roots[index];
+		}
+		return roots[index];
+	}
 	public void solve(char[][] board) {
 		if(board == null || board.length <= 1 || board[0].length <=1){
 			return;
